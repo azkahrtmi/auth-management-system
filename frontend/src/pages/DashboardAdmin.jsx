@@ -1,14 +1,7 @@
 import DashboardLayout from "../layout/DashboardLayout";
 
 function DashboardAdmin() {
-  return (
-    <DashboardLayout role="Admin">
-      <p>aduhai</p>
-      <p>aduhai</p>
-      <p>aduhai</p>
-      <p>aduhai</p>
-    </DashboardLayout>
-  );
+  return <DashboardLayout role="Admin" />;
 }
 
 export default DashboardAdmin;
