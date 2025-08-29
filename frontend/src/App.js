@@ -1,13 +1,23 @@
-import logo from "./logo.svg";
 import "./App.css";
 import "./index.css";
-import Navbar from "./components/navbar";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import DashUser from "./pages/DashUser";
+import DashAdmin from "./pages/DashAdmin";
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/dashboarduser" element={<DashUser />} />
+          <Route path="/dashboardadmin" element={<DashAdmin />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
