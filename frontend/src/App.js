@@ -1,5 +1,6 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import "./index.css";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         >
           Learn React
         </a>
+        <h1 className="text-3xl font-bold text-blue-500">Hello Tailwind!</h1>
       </header>
     </div>
   );
