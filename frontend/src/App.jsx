@@ -1,4 +1,3 @@
-import Navbar from "./components/Navbar";
 import DashboardLayout from "./layout/DashboardLayout";
 import DashboardAdmin from "./pages/DashboardAdmin";
 
