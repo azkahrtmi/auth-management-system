@@ -1,5 +1,5 @@
 import DashboardLayout from "../layout/DashboardLayout";
-import Table from "../components/Table";
+import ContainerTable from "../components/ContainerTable";
 
 const userData = [
   {
@@ -31,7 +31,7 @@ const userData = [
 function DashboardAdmin() {
   return (
     <DashboardLayout role="Admin">
-      <Table data={userData} />
+      <ContainerTable data={userData} />
     </DashboardLayout>
   );
 }
