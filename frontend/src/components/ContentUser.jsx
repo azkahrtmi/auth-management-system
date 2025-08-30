@@ -58,7 +58,7 @@ function ContentUser() {
           </div>
         </div>
         <div
-          className="w-[100px] h-[46px] flex justify-center items-center text-xl rounded-[10px] cursor-pointer"
+          className="w-[100px] h-[46px]  flex justify-center items-center text-xl rounded-[10px] cursor-pointer"
           onClick={() => setShowPassword(!showPassword)}
         >
           {showPassword ? (
