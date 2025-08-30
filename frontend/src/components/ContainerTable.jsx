@@ -1,4 +1,4 @@
-import Table from "./Table";
+import Table from "./TableAdmin";
 import TotalUsers from "./TotalUsers";
 
 function ContainerTable({ data, role }) {
@@ -20,7 +20,7 @@ function ContainerTable({ data, role }) {
         <TotalUsers data={data} role={role} />
       </div>
       <div className="p-8 rounded-lg shadow">
-        <Table data={data} />
+        {role === "Admin" ? <Table data={data} /> : <p>Ray Satria</p>}
       </div>
     </div>
   );
