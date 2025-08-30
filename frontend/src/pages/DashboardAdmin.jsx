@@ -1,4 +1,5 @@
 import DashboardLayout from "../layout/DashboardLayout";
+import Table from "../components/Table";
 
 const userData = [
   {

@@ -1,6 +1,6 @@
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import Table from "../components/Table";
+
 
 function DashboardLayout({ children, role }) {
   return (
