@@ -13,40 +13,40 @@ function ContentUser() {
   const role = "User";
 
   return (
-    <div className="border-red-500 flex flex-col gap-2.5">
+    <div className="border-red-500 flex flex-col gap-3">
       {/* username */}
       <div className="card-1 bg-[#EEE7F6] rounded-[20px] flex justify-between p-5 items-center">
-        <div className="flex justify-center items-center gap-1.5">
-          <RiAccountCircleLine className="text-6xl" />
+        <div className="flex justify-center items-center gap-5">
+          <RiAccountCircleLine className="text-5xl" />
           <div className="flex flex-col leading-tight self-center">
-            <span className="text-gray-600 font-semibold text-2xl">
+            <span className="text-gray-600 font-semibold text-xl">
               Username
             </span>
-            <span className="text-black font-normal text-xl">{username}</span>
+            <span className="text-black font-normal">{username}</span>
           </div>
         </div>
-        <div className="bg-[#ADBADA] w-[135px] h-[46px] text-center content-center text-xl rounded-[10px] text-gray-600">
-          {role}
+        <div className="bg-[#ADBADA] text-center content-center rounded-[10px] text-gray-600">
+          <p className="mx-5 my-1 font-light text-lg">{role}</p>
         </div>
       </div>
 
       {/* Email */}
       <div className="card-2 bg-[#EEE7F6] rounded-[20px] flex p-5 items-center">
-        <div className="flex justify-center items-center gap-1.5">
-          <IoMail className="text-6xl" />
+        <div className="flex justify-center items-center gap-5">
+          <IoMail className="text-5xl" />
           <div className="flex flex-col leading-tight self-center">
-            <span className="text-gray-600 font-semibold text-2xl">Email</span>
-            <span className="text-black font-normal text-xl">{email}</span>
+            <span className="text-gray-600 font-semibold text-xl">Email</span>
+            <span className="text-black font-normal ">{email}</span>
           </div>
         </div>
       </div>
 
       {/* Password */}
       <div className="card-3 bg-[#EEE7F6] rounded-[20px] flex justify-between p-5 items-center">
-        <div className="flex justify-center items-center gap-1.5">
-          <MdLock className="text-6xl" />
+        <div className="flex justify-center items-center gap-5">
+          <MdLock className="text-5xl" />
           <div className="flex flex-col leading-tight self-center">
-            <span className="text-gray-600 font-semibold text-2xl">
+            <span className="text-gray-600 font-semibold text-xl">
               Password
             </span>
             <input

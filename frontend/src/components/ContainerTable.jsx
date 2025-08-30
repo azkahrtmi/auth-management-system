@@ -1,13 +1,17 @@
 import ContentUser from "./ContentUser";
 import Table from "./TableAdmin";
 import TotalUsers from "./TotalUsers";
+import { IoPerson } from "react-icons/io5";
 
 function ContainerTable({ data, role }) {
   return (
     <div className="w-full max-w-4xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
-      <div className="p-4 border-b flex justify-between items-center">
-        <div>
-          <h2 className="text-xl font-bold">Profile Information</h2>
+      <div className="p-4 flex justify-between items-center">
+        <div className="pl-5">
+          <h2 className="text-xl font-bold pb-2">
+            <IoPerson className="inline-block mr-2 text-3xl" />
+            Profile Information
+          </h2>
           {role === "Admin" ? (
             <p className="text-sm text-gray-500">
               Manage All Users Information.{" "}
