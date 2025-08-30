@@ -1,20 +1,23 @@
-import { MdEdit } from "react-icons/md";
-import { MdDelete } from "react-icons/md";
 import Table from "./Table";
+import TotalUsers from "./TotalUsers";
 
-function ContainerTable({ data }) {
+function ContainerTable({ data, role }) {
   return (
     <div className="w-full max-w-4xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
       <div className="p-4 border-b flex justify-between items-center">
         <div>
           <h2 className="text-xl font-bold">Profile Information</h2>
-          <p className="text-sm text-gray-500">Manage all users information.</p>
+          {role === "Admin" ? (
+            <p className="text-sm text-gray-500">
+              Manage All Users Information.{" "}
+            </p>
+          ) : (
+            <p className="text-sm text-gray-500">
+              Your Registered Profile Information.{" "}
+            </p>
+          )}
         </div>
-        <div>
-          <span className="text-sm text-gray-500">
-            {data.length} Total Users
-          </span>
-        </div>
+        <TotalUsers data={data} role={role} />
       </div>
       <div className="p-8 rounded-lg shadow">
         <Table data={data} />

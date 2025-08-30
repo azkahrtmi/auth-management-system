@@ -31,7 +31,11 @@ const userData = [
 function DashboardAdmin() {
   return (
     <DashboardLayout role="Admin">
-      <ContainerTable data={userData} />
+      <ContainerTable
+        text="Manage all users information."
+        data={userData}
+        role="Admin"
+      />
     </DashboardLayout>
   );
 }

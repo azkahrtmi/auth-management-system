@@ -4,7 +4,7 @@ import DashboardAdmin from "./pages/DashboardAdmin";
 function App() {
   return (
     <div>
-      <DashboardAdmin />
+      <DashboardUser />
     </div>
   );
 }

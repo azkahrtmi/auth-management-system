@@ -1,4 +1,6 @@
 import React from "react";
+import { MdEdit } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 
 function Table({ data }) {
   return (
@@ -34,10 +36,10 @@ function Table({ data }) {
               </span>
             </td>
             <td className="p-4 border-b flex gap-2">
-              <button className="p-2 bg-blue-100 hover:bg-blue-200 rounded-lg">
+              <button className="p-2 bg-blue-100 hover:bg-blue-200 rounded-lg cursor-pointer">
                 <MdEdit />
               </button>
-              <button className="p-2 bg-red-100 hover:bg-red-200 rounded-lg">
+              <button className="p-2 bg-red-100 hover:bg-red-200 rounded-lg cursor-pointer">
                 <MdDelete />
               </button>
             </td>
