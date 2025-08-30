@@ -15,8 +15,8 @@ function Table({ data }) {
           </span>
         </div>
       </div>
-      <div className="p-8">
-        <table className="w-full text-left border border-black-800">
+      <div className="p-8 rounded-lg shadow overflow-auto">
+        <table className="w-full text-left rounded-lg overflow-auto shadow">
           <thead>
             <tr className="bg-[#EEE7F6] text-gray-700">
               <th className="p-4 border-b">Username</th>
