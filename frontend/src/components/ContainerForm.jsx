@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 
 function ContainerForm() {
-  const notify = () => toast.error("Toasterrrrrrrrrrrrrrrrr");
+  const notify = () => toast.error("ayam");
   return (
     <>
       <div className="flex flex-col text-center absolute top-5">
@@ -58,7 +58,6 @@ function ContainerForm() {
         onClick={notify}
       >
         <p>Test Toast</p>
-        <Toaster />
       </button>
     </>
   );
