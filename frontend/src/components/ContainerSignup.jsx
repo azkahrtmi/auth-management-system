@@ -4,10 +4,6 @@ import { Link } from "react-router-dom";
 function ContainerForm() {
   return (
     <>
-      <div className="flex flex-col text-center absolute top-5">
-        <h1 className="text-[#3D52A1] text-[56px] font-bold">AUTH APP</h1>
-        <h3 className="text-[#3D52A1] font-semibold">Welcome to Auth App</h3>
-      </div>
       <form action="POST" className="">
         <div
           style={{
@@ -24,14 +20,20 @@ function ContainerForm() {
           />
           <input
             className="bg-white border w-100 border-gray-300 rounded-xl p-4 mb-4"
+            type="text"
+            name="username"
+            placeholder="Enter username"
+          />
+          <input
+            className="bg-white border w-100 border-gray-300 rounded-xl p-4 mb-4"
             type="password"
             name="password"
             placeholder="Enter Password"
           />
           <div className="flex flex-row justify-center w-full text-sm text-white">
-            <span>Doesnt have account?</span>
-            <Link to="/signup" className="underline font-bold">
-              &nbsp;Register Here
+            <span>Already Have Account? </span>
+            <Link to="/" className="underline font-bold">
+              &nbsp;Sign In
             </Link>
           </div>
         </div>
@@ -43,7 +45,7 @@ function ContainerForm() {
           className="w-[500px] h-[55px] rounded-xl mt-5 font-bold text-[25px] text-white cursor-pointer shadow hover:opacity-90"
           type="submit"
         >
-          <p>LOGIN</p>
+          <p>REGISTER</p>
         </button>
       </form>
     </>

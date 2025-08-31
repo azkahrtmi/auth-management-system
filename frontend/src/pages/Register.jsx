@@ -1,5 +1,12 @@
+import ContainerForm from "../components/ContainerSignup";
+import AuthLayout from "../layout/AuthLayout";
+
 function Register() {
-  return <div>halo regis</div>;
+  return (
+    <AuthLayout>
+      <ContainerForm />
+    </AuthLayout>
+  );
 }
 
 export default Register;
