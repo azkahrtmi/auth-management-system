@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 function ContainerForm() {
+  const notify = () => toast.error("Toasterrrrrrrrrrrrrrrrr");
   return (
     <>
       <div className="flex flex-col text-center absolute top-5">
@@ -46,6 +48,18 @@ function ContainerForm() {
           <p>LOGIN</p>
         </button>
       </form>
+      <button
+        style={{
+          background:
+            "linear-gradient(to bottom, rgb(113, 145, 230, 0.7), rgb(61, 82, 161))",
+        }}
+        className="w-[500px] h-[55px] rounded-xl mt-5 font-bold text-[25px] text-white cursor-pointer shadow hover:opacity-90"
+        type="submit"
+        onClick={notify}
+      >
+        <p>Test Toast</p>
+        <Toaster />
+      </button>
     </>
   );
 }
