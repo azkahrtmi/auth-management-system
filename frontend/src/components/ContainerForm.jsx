@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 
 function ContainerForm() {
-  const notify = () => toast.error("ayam");
+  const notify = () => toast.success("ayam");
   return (
     <>
       <div className="flex flex-col text-center absolute top-5">

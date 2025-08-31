@@ -5,13 +5,13 @@ const userData = [
   {
     username: "RezaPahlevi",
     email: "rezapahlevi@gmail.com",
-    role: "Admin",
+    role: "User",
     status: "Active",
   },
   {
     username: "AzkaHartami",
     email: "azkahartami@gmail.com",
-    role: "Admin",
+    role: "User",
     status: "Active",
   },
   {
@@ -23,8 +23,8 @@ const userData = [
   {
     username: "RajaHartami",
     email: "rajahartami@gmail.com",
-    role: "Admin",
-    status: "Inactive",
+    role: "User",
+    status: "Active",
   },
 ];
 
