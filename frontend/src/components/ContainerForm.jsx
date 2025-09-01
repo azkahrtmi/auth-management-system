@@ -1,16 +1,55 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 
 function ContainerForm() {
-  const notify = () => toast.success("ayam");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch("http://localhost:5000/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast.error(data.message || "Login gagal");
+        return;
+      }
+
+      // simpan token & role
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("role", data.user.role);
+
+      toast.success("Login berhasil!");
+
+      // redirect sesuai role
+      if (data.user.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/user");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      toast.error("Terjadi kesalahan server");
+    }
+  };
+
   return (
     <>
       <div className="flex flex-col text-center absolute top-5">
         <h1 className="text-[#3D52A1] text-[56px] font-bold">AUTH APP</h1>
         <h3 className="text-[#3D52A1] font-semibold">Welcome to Auth App</h3>
       </div>
-      <form action="POST" className="">
+
+      <form onSubmit={handleLogin} className="">
         <div
           style={{
             background:
@@ -23,12 +62,16 @@ function ContainerForm() {
             type="email"
             name="email"
             placeholder="Enter Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <input
             className="bg-white border w-100 border-gray-300 rounded-xl p-4 mb-4"
             type="password"
             name="password"
             placeholder="Enter Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <div className="flex flex-row justify-center w-full text-sm text-white">
             <span>Doesnt have account?</span>
@@ -48,17 +91,8 @@ function ContainerForm() {
           <p>LOGIN</p>
         </button>
       </form>
-      <button
-        style={{
-          background:
-            "linear-gradient(to bottom, rgb(113, 145, 230, 0.7), rgb(61, 82, 161))",
-        }}
-        className="w-[500px] h-[55px] rounded-xl mt-5 font-bold text-[25px] text-white cursor-pointer shadow hover:opacity-90"
-        type="submit"
-        onClick={notify}
-      >
-        <p>Test Toast</p>
-      </button>
+
+      <Toaster position="top-right" />
     </>
   );
 }
