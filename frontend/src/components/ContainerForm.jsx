@@ -20,7 +20,11 @@ function ContainerForm() {
       const data = await res.json();
 
       if (!res.ok) {
-        toast.error(data.message || "Login gagal");
+        if (data.message === "Email atau password tidak sesuai") {
+          toast.error("Email atau password tidak sesuai");
+        } else {
+          toast.error(data.message || "Login gagal");
+        }
         return;
       }
 

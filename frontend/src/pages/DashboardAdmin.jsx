@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import DashboardLayout from "../layout/DashboardLayout";
 import ContainerTable from "../components/ContainerTable";
+import Spinner from "../components/Spinner";
 
 function DashboardAdmin() {
   const [users, setUsers] = useState([]);
@@ -58,7 +59,7 @@ function DashboardAdmin() {
   return (
     <DashboardLayout role="Admin">
       {loading ? (
-        <p>Loading users...</p>
+        <Spinner />
       ) : (
         <ContainerTable
           text="Manage all users information."

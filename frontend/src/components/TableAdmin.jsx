@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 function Table({ data, onDelete }) {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 2;
+  const itemsPerPage = 5;
 
   // Hitung jumlah halaman
   const totalPages = Math.ceil(data.length / itemsPerPage);
