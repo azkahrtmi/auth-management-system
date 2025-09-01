@@ -3,6 +3,7 @@ import pool from "../config/db";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import { verifyToken } from "../middleware/authMiddleware";
 
 dotenv.config();
 
@@ -87,11 +88,22 @@ router.post("/login", async (req: Request, res: Response) => {
     res.json({
       message: "Login successful",
       token,
+      user: {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        role: user.role,
+      },
     });
   } catch (err) {
     console.error("Login error:", err);
     res.status(500).json({ message: "Server error" });
   }
+});
+
+// VERIFY
+router.get("/verify", verifyToken, (req: any, res: Response) => {
+  res.json({ valid: true, user: req.user });
 });
 
 export default router;
