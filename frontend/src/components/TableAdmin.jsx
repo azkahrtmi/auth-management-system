@@ -6,6 +6,8 @@ function Table({ data, onDelete }) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
+  const [userToDelete, setUserToDelete] = useState(null); // simpan user yang dipilih
+
   // Hitung jumlah halaman
   const totalPages = Math.ceil(data.length / itemsPerPage);
 
@@ -22,12 +24,13 @@ function Table({ data, onDelete }) {
     }
   };
 
-  // Handler delete
-  const handleDelete = (id) => {
-    if (onDelete) {
-      onDelete(id);
-      toast.success("Data berhasil dihapus");
+  // Handler delete setelah konfirmasi
+  const confirmDelete = () => {
+    if (onDelete && userToDelete) {
+      onDelete(userToDelete.id);
+      toast.success(`Data ${userToDelete.username} berhasil dihapus`);
     }
+    setUserToDelete(null); // tutup modal
   };
 
   return (
@@ -69,7 +72,7 @@ function Table({ data, onDelete }) {
                 </button>
                 <button
                   className="p-2 bg-red-100 hover:bg-red-200 rounded-lg cursor-pointer"
-                  onClick={() => handleDelete(user.id)}
+                  onClick={() => setUserToDelete(user)} // simpan user yang dipilih
                 >
                   <MdDelete />
                 </button>
@@ -79,6 +82,7 @@ function Table({ data, onDelete }) {
         </tbody>
       </table>
 
+      {/* Pagination */}
       <div className="flex justify-center items-center gap-3 mt-4">
         <button
           className="p-2 text-white bg-blue-500 rounded cursor-pointer hover:opacity-50"
@@ -108,6 +112,33 @@ function Table({ data, onDelete }) {
           Next
         </button>
       </div>
+
+      {/* Modal Konfirmasi */}
+      {userToDelete && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+          <div className="bg-white p-6 rounded-xl shadow-lg max-w-sm">
+            <h2 className="text-lg font-semibold">Konfirmasi Hapus</h2>
+            <p className="text-sm text-gray-600 mt-2">
+              Apakah anda yakin ingin menghapus username{" "}
+              <span className="font-bold">{userToDelete.username}</span>?
+            </p>
+            <div className="flex justify-end gap-2 mt-4">
+              <button
+                className="px-3 py-1 rounded-lg bg-gray-200 hover:bg-gray-300"
+                onClick={() => setUserToDelete(null)}
+              >
+                Tidak
+              </button>
+              <button
+                className="px-3 py-1 rounded-lg bg-red-500 text-white hover:bg-red-600"
+                onClick={confirmDelete}
+              >
+                Iya
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

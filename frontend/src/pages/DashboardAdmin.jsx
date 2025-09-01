@@ -26,7 +26,7 @@ function DashboardAdmin() {
       } catch (err) {
         console.error(err.message);
       } finally {
-        setLoading(false);
+        setTimeout(() => setLoading(false), 1500); // waktu spinner
       }
     };
 
