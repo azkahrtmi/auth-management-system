@@ -102,8 +102,17 @@ router.post("/login", async (req: Request, res: Response) => {
 });
 
 // VERIFY
-router.get("/verify", verifyToken, (req: any, res: Response) => {
-  res.json({ valid: true, user: req.user });
+// VERIFY
+router.get("/verify", verifyToken, async (req: any, res: Response) => {
+  try {
+    const userResult = await pool.query(
+      "SELECT id, username, email, role FROM users WHERE id = $1",
+      [req.user.id]
+    );
+    res.json({ valid: true, user: userResult.rows[0] });
+  } catch (error) {
+    res.status(500).json({ valid: false, message: "Server error" });
+  }
 });
 
 export default router;

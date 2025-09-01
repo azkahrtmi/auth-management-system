@@ -1,41 +1,72 @@
+// DashboardAdmin.jsx
+import { useEffect, useState } from "react";
 import DashboardLayout from "../layout/DashboardLayout";
 import ContainerTable from "../components/ContainerTable";
 
-const userData = [
-  {
-    username: "RezaPahlevi",
-    email: "rezapahlevi@gmail.com",
-    role: "User",
-    status: "Active",
-  },
-  {
-    username: "AzkaHartami",
-    email: "azkahartami@gmail.com",
-    role: "User",
-    status: "Active",
-  },
-  {
-    username: "AfdhalHartami",
-    email: "afdhalhartami@gmail.com",
-    role: "User",
-    status: "Active",
-  },
-  {
-    username: "RajaHartami",
-    email: "rajahartami@gmail.com",
-    role: "User",
-    status: "Active",
-  },
-];
-
 function DashboardAdmin() {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        const res = await fetch("http://localhost:5000/admin/users", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!res.ok) throw new Error("Failed to fetch users");
+
+        const data = await res.json();
+        setUsers(data);
+      } catch (err) {
+        console.error(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+  // DELETE handler
+  const handleDelete = async (id) => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`http://localhost:5000/admin/users/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.message || "Failed to delete user");
+      }
+
+      setUsers((prev) => prev.filter((u) => u.id !== id));
+    } catch (err) {
+      console.error("Delete error:", err);
+      alert(err.message || "Gagal menghapus user");
+    }
+  };
+
   return (
     <DashboardLayout role="Admin">
-      <ContainerTable
-        text="Manage all users information."
-        data={userData}
-        role="Admin"
-      />
+      {loading ? (
+        <p>Loading users...</p>
+      ) : (
+        <ContainerTable
+          text="Manage all users information."
+          data={users}
+          role="Admin"
+          onDelete={handleDelete}
+        />
+      )}
     </DashboardLayout>
   );
 }

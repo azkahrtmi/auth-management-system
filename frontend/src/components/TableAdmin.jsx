@@ -1,27 +1,35 @@
-import React from "react";
-import { useState } from "react";
-import { MdEdit } from "react-icons/md";
-import { MdDelete } from "react-icons/md";
+import React, { useState } from "react";
+import { MdEdit, MdDelete } from "react-icons/md";
+import toast from "react-hot-toast";
 
-function Table({ data }) {
+function Table({ data, onDelete }) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 2;
 
-  //Hitung jumlah halaman
+  // Hitung jumlah halaman
   const totalPages = Math.ceil(data.length / itemsPerPage);
 
-  //Data untuk halaman current
+  // Data untuk halaman current
   const currentData = data.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
 
-  //Pindah Halaman
+  // Pindah Halaman
   const goToPage = (page) => {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
     }
   };
+
+  // Handler delete
+  const handleDelete = (id) => {
+    if (onDelete) {
+      onDelete(id);
+      toast.success("Data berhasil dihapus");
+    }
+  };
+
   return (
     <>
       <table className="w-full text-left rounded-lg overflow-auto shadow">
@@ -47,7 +55,7 @@ function Table({ data }) {
               <td className="p-4 border-b">
                 <span
                   className={`px-2 py-1 rounded-full text-sm ${
-                    user.status === "Active"
+                    user.status === "active"
                       ? "bg-green-100 text-green-600"
                       : "bg-red-100 text-red-600"
                   }`}
@@ -59,7 +67,10 @@ function Table({ data }) {
                 <button className="p-2 bg-blue-100 hover:bg-blue-200 rounded-lg cursor-pointer">
                   <MdEdit />
                 </button>
-                <button className="p-2 bg-red-100 hover:bg-red-200 rounded-lg cursor-pointer">
+                <button
+                  className="p-2 bg-red-100 hover:bg-red-200 rounded-lg cursor-pointer"
+                  onClick={() => handleDelete(user.id)}
+                >
                   <MdDelete />
                 </button>
               </td>
@@ -67,6 +78,7 @@ function Table({ data }) {
           ))}
         </tbody>
       </table>
+
       <div className="flex justify-center items-center gap-3 mt-4">
         <button
           className="p-2 text-white bg-blue-500 rounded cursor-pointer hover:opacity-50"
@@ -78,7 +90,7 @@ function Table({ data }) {
         {Array.from({ length: totalPages }, (_, index) => (
           <button
             key={index}
-            className={`p-2 rounded${
+            className={`p-2 rounded ${
               currentPage === index + 1
                 ? "bg-blue-500 text-white"
                 : "bg-gray-200 hover:bg-gray-300"

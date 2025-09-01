@@ -3,7 +3,7 @@ import Table from "./TableAdmin";
 import TotalUsers from "./TotalUsers";
 import { IoPerson } from "react-icons/io5";
 
-function ContainerTable({ data, role }) {
+function ContainerTable({ data, role, onDelete }) {
   return (
     <div className="w-full max-w-4xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
       <div className="p-4 flex justify-between items-center">
@@ -25,7 +25,11 @@ function ContainerTable({ data, role }) {
         <TotalUsers data={data} role={role} />
       </div>
       <div className="p-8 rounded-lg shadow">
-        {role === "Admin" ? <Table data={data} /> : <ContentUser />}
+        {role === "Admin" ? (
+          <Table data={data} onDelete={onDelete} />
+        ) : (
+          <ContentUser />
+        )}
       </div>
     </div>
   );
