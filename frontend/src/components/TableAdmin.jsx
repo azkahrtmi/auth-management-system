@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { MdEdit, MdDelete } from "react-icons/md";
 import ModalEdit from "./ModalEdit";
 import toast from "react-hot-toast";
+import { MdNavigateNext } from "react-icons/md";
+import { MdNavigateBefore } from "react-icons/md";
 
 function Table({ data, onDelete, onEdit }) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
-  const [userToEdit, setUserToEdit] = useState(null); // simpan user yang akan diedit
-  const [userToDelete, setUserToDelete] = useState(null); // simpan user yang
+  const [userToEdit, setUserToEdit] = useState(null); // Simpan user yang akan diedit
+  const [userToDelete, setUserToDelete] = useState(null); // Simpan user yang akan dihapus
   const [openModalEdit, setOpenEdit] = useState(false);
 
   // Hitung jumlah halaman
@@ -19,6 +21,9 @@ function Table({ data, onDelete, onEdit }) {
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
+
+  // Hitung jumlah baris kosong
+  const emptyRows = itemsPerPage - currentData.length;
 
   // Pindah Halaman
   const goToPage = (page) => {
@@ -33,19 +38,19 @@ function Table({ data, onDelete, onEdit }) {
       onDelete(userToDelete.id);
       toast.success(`Data ${userToDelete.username} berhasil dihapus`);
     }
-    setUserToDelete(null); // tutup modal
+    setUserToDelete(null); // Tutup modal
   };
 
   return (
     <>
-      <table className="w-full text-left rounded-lg overflow-auto shadow">
+      <table className="w-full text-left table-fixed rounded-lg overflow-auto shadow">
         <thead>
           <tr className="bg-[#EEE7F6] text-gray-700">
-            <th className="p-4 border-b">Username</th>
-            <th className="p-4 border-b">Email</th>
-            <th className="p-4 border-b">Role</th>
-            <th className="p-4 border-b">Status</th>
-            <th className="p-4 border-b">Action</th>
+            <th className="p-4 border-b w-[20%]">Username</th>
+            <th className="p-4 border-b w-[30%]">Email</th>
+            <th className="p-4 border-b w-[15%]">Role</th>
+            <th className="p-4 border-b w-[15%]">Status</th>
+            <th className="p-4 border-b w-[20%]">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -54,20 +59,20 @@ function Table({ data, onDelete, onEdit }) {
               <td className="p-4 border-b font-bold">{user.username}</td>
               <td className="p-4 border-b font-light">{user.email}</td>
               <td className="p-4 border-b">
-                <span className="px-2 py-1 rounded-full bg-blue-100 text-blue-600 text-sm">
+                <div className="w-18 py-2 text-center rounded-lg bg-blue-100 text-blue-600 text-sm">
                   {user.role}
-                </span>
+                </div>
               </td>
               <td className="p-4 border-b">
-                <span
-                  className={`px-2 py-1 rounded-full text-sm ${
+                <div
+                  className={`w-22 py-2 rounded-lg text-sm ${
                     user.status === "active"
-                      ? "bg-green-100 text-green-600"
-                      : "bg-red-100 text-red-600"
+                      ? "w-22 py-2 text-center rounded-lg bg-green-100 text-green-600"
+                      : "w-22 py-2 text-center rounded-lg bg-red-100 text-red-600"
                   }`}
                 >
                   {user.status}
-                </span>
+                </div>
               </td>
               <td className="p-4 border-b flex gap-2">
                 <button
@@ -81,10 +86,36 @@ function Table({ data, onDelete, onEdit }) {
                 </button>
                 <button
                   className="p-2 bg-red-100 hover:bg-red-200 rounded-lg cursor-pointer"
-                  onClick={() => setUserToDelete(user)} // simpan user yang dipilih
+                  onClick={() => setUserToDelete(user)} // Simpan user yang dipilih
                 >
                   <MdDelete />
                 </button>
+              </td>
+            </tr>
+          ))}
+
+          {/* Tambahkan baris kosong jika data kurang dari lima */}
+          {Array.from({ length: emptyRows }, (_, index) => (
+            <tr key={`empty-${index}`} className="hover:bg-gray-100">
+              <td className="p-4 border-b font-bold text-gray-400">-</td>
+              <td className="p-4 border-b font-light text-gray-400">-</td>
+              <td className="p-4 border-b">
+                <div className="w-18 py-2 text-center rounded-lg bg-gray-100 text-gray-400 text-sm">
+                  -
+                </div>
+              </td>
+              <td className="p-4 border-b">
+                <div className="w-22 py-2 text-center rounded-lg bg-gray-100 text-gray-400 text-sm">
+                  -
+                </div>
+              </td>
+              <td className="p-4 border-b flex gap-2">
+                <div className="p-2 rounded-lg bg-gray-100 text-gray-400">
+                  -
+                </div>
+                <div className="p-2 rounded-lg bg-gray-100 text-gray-400">
+                  -
+                </div>
               </td>
             </tr>
           ))}
@@ -94,16 +125,16 @@ function Table({ data, onDelete, onEdit }) {
       {/* Pagination */}
       <div className="flex justify-center items-center gap-3 mt-4">
         <button
-          className="p-2 text-white bg-blue-500 rounded cursor-pointer hover:opacity-50"
+          className="p-2 py-3 text-white bg-blue-500 rounded-lg cursor-pointer hover:opacity-50"
           onClick={() => goToPage(currentPage - 1)}
           disabled={currentPage === 1}
         >
-          Previous
+          <MdNavigateBefore />
         </button>
         {Array.from({ length: totalPages }, (_, index) => (
           <button
             key={index}
-            className={`p-2 rounded ${
+            className={`p-2 w-10 rounded-lg cursor-pointer ${
               currentPage === index + 1
                 ? "bg-blue-500 text-white"
                 : "bg-gray-200 hover:bg-gray-300"
@@ -114,11 +145,11 @@ function Table({ data, onDelete, onEdit }) {
           </button>
         ))}
         <button
-          className="p-2 text-white bg-blue-500 rounded cursor-pointer hover:opacity-50"
+          className="p-2 py-3 text-white bg-blue-500 rounded-lg cursor-pointer hover:opacity-50"
           onClick={() => goToPage(currentPage + 1)}
           disabled={currentPage === totalPages}
         >
-          Next
+          <MdNavigateNext />
         </button>
       </div>
 

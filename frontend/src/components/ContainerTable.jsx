@@ -61,24 +61,27 @@ function ContainerTable({ data, role, onDelete, onEdit }) {
 
       {role === "Admin" && (
         <div className="pl-10 flex gap-5">
-          <button
-            className="bg-amber-300 p-2 rounded-xl cursor-pointer"
-            onClick={() => {
-              setModalType("admin");
-              setOpenModal(true);
-            }}
-          >
-            Create new Admin
-          </button>
-          <button
-            className="bg-amber-500 p-2 rounded-xl cursor-pointer"
-            onClick={() => {
-              setModalType("user");
-              setOpenModal(true);
-            }}
-          >
-            Create new User
-          </button>
+          <div className="flex gap-4">
+            <button
+              className="cursor-pointer flex items-center gap-2 bg-[#ADDBDA] text-[#1f2937] font-medium px-4 py-2 rounded-lg shadow hover:bg-[#9bc7c6] transition"
+              onClick={() => {
+                setModalType("admin");
+                setOpenModal(true);
+              }}
+            >
+              <span>➕</span> Create Admin
+            </button>
+
+            <button
+              className="cursor-pointer flex items-center gap-2 bg-[#8697E4] text-white font-medium px-4 py-2 rounded-lg shadow hover:bg-[#7384d1] transition"
+              onClick={() => {
+                setModalType("user");
+                setOpenModal(true);
+              }}
+            >
+              <span>👤</span> Create User
+            </button>
+          </div>
         </div>
       )}
 

@@ -1,7 +1,7 @@
 function Footer() {
   return (
-    <footer className="text-[#3D52A1] text-center py-4">
-      Design by Reza Pahlevi Firdaus
+    <footer className="text-[#3D52A1] text-center pt-4">
+      Designed by @AzkaReza
     </footer>
   );
 }
