@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-function ModalEdit({ open, onClose, user }) {
+function ModalEdit({ open, onClose, user, onEdit }) {
   const [username, setUsername] = useState("");
   const [role, setRole] = useState("");
   const [status, setStatus] = useState("");
@@ -15,9 +15,12 @@ function ModalEdit({ open, onClose, user }) {
     }
   }, [user]);
 
-  const handleEdit = () => {
+  const handleEdit = async () => {
     const updatedUser = { ...user, username, role, status };
     console.log("Updated User:", updatedUser); // Debugging
+    if (onEdit) {
+      onEdit(updatedUser.id, updatedUser);
+    }
     onClose(); // Tutup modal setelah menyimpan
   };
   if (!open) return null;

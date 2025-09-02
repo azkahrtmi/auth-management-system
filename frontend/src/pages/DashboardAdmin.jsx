@@ -58,22 +58,29 @@ function DashboardAdmin() {
   };
 
   // Edit Handler
-  const handleEdit = async (id) => {
+  const handleEdit = async (id, updatedUser) => {
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(`http://localhost:5000/admin/users/${id}`, {
         method: "PUT",
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
+        body: JSON.stringify(updatedUser),
       });
 
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
         throw new Error(err.message || "Failed to edit user");
       }
-
-      setUsers((prev) => prev.filter((u) => u.id !== id));
+      // const data = await res.json();
+      // update state dengan data user yang baru
+      setUsers((prev) =>
+        prev.map((u) => (u.id === id ? { ...u, ...updatedUser } : u))
+      );
+      // setUsers((prev) => prev.filter((u) => u.id !== id));
+      toast.success("Update data berhasil");
     } catch (err) {
       console.error("Edit error:", err);
       toast.error(err.message || "Gagal mengedit user");

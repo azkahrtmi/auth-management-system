@@ -3,7 +3,7 @@ import { MdEdit, MdDelete } from "react-icons/md";
 import ModalEdit from "./ModalEdit";
 import toast from "react-hot-toast";
 
-function Table({ data, onDelete }) {
+function Table({ data, onDelete, onEdit }) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
@@ -152,6 +152,7 @@ function Table({ data, onDelete }) {
         user={userToEdit}
         open={openModalEdit}
         onClose={() => setOpenEdit(false)}
+        onEdit={onEdit}
       />
     </>
   );
