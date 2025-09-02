@@ -123,21 +123,25 @@ router.put(
   async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
-      const { role, status } = req.body;
+      const { username, role, status } = req.body;
 
-      if (!role && !status) {
+      if (!username && !role && !status) {
         return res
           .status(400)
-          .json({ message: "At least one field (role or status) is required" });
+          .json({
+            message:
+              "At least one field (username, role or status) is required",
+          });
       }
 
       const result = await pool.query(
         `UPDATE users
-         SET role = COALESCE($1, role),
-             status = COALESCE($2, status)
-         WHERE id = $3
+         SET username = COALESCE($1, username),
+             role = COALESCE($2, role),
+             status = COALESCE($3, status)
+         WHERE id = $4
          RETURNING id, username, email, role, status`,
-        [role, status, id]
+        [username, role, status, id]
       );
 
       if (result.rows.length === 0) {
