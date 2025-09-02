@@ -6,7 +6,7 @@ import { IoPerson } from "react-icons/io5";
 import ModalCreateUser from "./ModalCreateUser";
 import toast from "react-hot-toast";
 
-function ContainerTable({ data, role, onDelete }) {
+function ContainerTable({ data, role, onDelete, onEdit }) {
   const [openModal, setOpenModal] = useState(false);
   const [modalType, setModalType] = useState(null); // "admin" atau "user"
 
@@ -84,7 +84,7 @@ function ContainerTable({ data, role, onDelete }) {
 
       <div className="p-8 rounded-lg shadow">
         {role === "Admin" ? (
-          <Table data={data} onDelete={onDelete} />
+          <Table data={data} onDelete={onDelete} onEdit={onEdit} />
         ) : (
           <ContentUser />
         )}

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import DashboardLayout from "../layout/DashboardLayout";
 import ContainerTable from "../components/ContainerTable";
 import Spinner from "../components/Spinner";
+import toast from "react-hot-toast";
 
 function DashboardAdmin() {
   const [users, setUsers] = useState([]);
@@ -56,6 +57,29 @@ function DashboardAdmin() {
     }
   };
 
+  // Edit Handler
+  const handleEdit = async (id) => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`http://localhost:5000/admin/users/${id}`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.message || "Failed to edit user");
+      }
+
+      setUsers((prev) => prev.filter((u) => u.id !== id));
+    } catch (err) {
+      console.error("Edit error:", err);
+      toast.error(err.message || "Gagal mengedit user");
+    }
+  };
+
   return (
     <DashboardLayout role="Admin">
       {loading ? (
@@ -66,6 +90,7 @@ function DashboardAdmin() {
           data={users}
           role="Admin"
           onDelete={handleDelete}
+          onEdit={handleEdit}
         />
       )}
     </DashboardLayout>

@@ -56,7 +56,7 @@ function ModalCreateUser({ open, onClose, onSubmit, type }) {
             <select
               name="status"
               onChange={handleChange}
-              className="w-full border px-3 py-2 rounded"
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 cursor-pointer"
               defaultValue="active"
             >
               <option value="active">Active</option>
@@ -67,14 +67,14 @@ function ModalCreateUser({ open, onClose, onSubmit, type }) {
           <div className="flex justify-end gap-2 pt-3">
             <button
               type="button"
-              className="px-3 py-2 rounded bg-gray-200"
+              className="px-3 py-2 rounded bg-gray-200 cursor-pointer"
               onClick={onClose}
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-3 py-2 rounded bg-blue-500 text-white"
+              className="px-3 py-2 rounded bg-blue-500 text-white cursor-pointer"
             >
               Create
             </button>

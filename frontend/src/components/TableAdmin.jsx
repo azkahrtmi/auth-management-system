@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { MdEdit, MdDelete } from "react-icons/md";
+import ModalEdit from "./ModalEdit";
 import toast from "react-hot-toast";
 
 function Table({ data, onDelete }) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
-  const [userToDelete, setUserToDelete] = useState(null); // simpan user yang dipilih
+  const [userToEdit, setUserToEdit] = useState(null); // simpan user yang akan diedit
+  const [userToDelete, setUserToDelete] = useState(null); // simpan user yang
+  const [openModalEdit, setOpenEdit] = useState(false);
 
   // Hitung jumlah halaman
   const totalPages = Math.ceil(data.length / itemsPerPage);
@@ -67,7 +70,13 @@ function Table({ data, onDelete }) {
                 </span>
               </td>
               <td className="p-4 border-b flex gap-2">
-                <button className="p-2 bg-blue-100 hover:bg-blue-200 rounded-lg cursor-pointer">
+                <button
+                  onClick={() => {
+                    setUserToEdit(user);
+                    setOpenEdit(true);
+                  }}
+                  className="p-2 bg-blue-100 hover:bg-blue-200 rounded-lg cursor-pointer"
+                >
                   <MdEdit />
                 </button>
                 <button
@@ -139,6 +148,11 @@ function Table({ data, onDelete }) {
           </div>
         </div>
       )}
+      <ModalEdit
+        user={userToEdit}
+        open={openModalEdit}
+        onClose={() => setOpenEdit(false)}
+      />
     </>
   );
 }
