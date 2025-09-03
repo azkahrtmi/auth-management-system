@@ -15,8 +15,8 @@ function ContainerTable({ data, role, onDelete, onEdit }) {
       const token = localStorage.getItem("token");
       const endpoint =
         modalType === "admin"
-          ? "http://localhost:5000/admin/create-admin"
-          : "http://localhost:5000/admin/users";
+          ? `${import.meta.env.VITE_API_URL}/admin/create-admin`
+          : `${import.meta.env.VITE_API_URL}/admin/users`;
 
       const res = await fetch(endpoint, {
         method: "POST",

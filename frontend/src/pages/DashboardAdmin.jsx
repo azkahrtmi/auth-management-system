@@ -14,7 +14,7 @@ function DashboardAdmin() {
       try {
         const token = localStorage.getItem("token");
 
-        const res = await fetch("http://localhost:5000/admin/users", {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/admin/users`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -38,12 +38,15 @@ function DashboardAdmin() {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:5000/admin/users/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/admin/users/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
@@ -61,14 +64,17 @@ function DashboardAdmin() {
   const handleEdit = async (id, updatedUser) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:5000/admin/users/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(updatedUser),
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/admin/users/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(updatedUser),
+        }
+      );
 
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
