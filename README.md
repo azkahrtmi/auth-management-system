@@ -111,7 +111,7 @@ You can try the deployed project here:
 
 | Method | Endpoint              | Description           |
 | ------ | --------------------- | --------------------- |
-| POST   | `/auth/register`      | Register new user     |
+| POST   | `/auth/signup`        | Register new user     |
 | POST   | `/auth/login`         | Login (user/admin)    |
 | GET    | `/admin/users`        | Admin: view all users |
 | POST   | `/admin/users`        | Admin: create user    |
