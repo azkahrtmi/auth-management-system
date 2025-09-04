@@ -12,7 +12,7 @@ function ContentUser() {
     const fetchUser = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:5000/auth/verify", {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/verify`, {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },
         });
