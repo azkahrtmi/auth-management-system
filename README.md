@@ -93,15 +93,7 @@ npm run dev
 - Design Figma
   <img width="810" height="473" alt="image" src="https://github.com/user-attachments/assets/7c042de2-92e9-487d-9c30-95bb0931007a" />
 
-### 🌐 Live Demo
 
-You can try the deployed project here:  
-👉 [Auth Management System](https://auth-management-system.vercel.app/admin)
-
-**Admin Test Account**
-
-- Email: `reza@mail.com`
-- Password: `reza123`
 
 ---
 
