@@ -74,7 +74,7 @@ function Table({ data, onDelete, onEdit }) {
                   {user.status}
                 </div>
               </td>
-              <td className="p-4 border-b flex gap-2">
+              <td className="p-5 border-b flex gap-2">
                 <button
                   onClick={() => {
                     setUserToEdit(user);
