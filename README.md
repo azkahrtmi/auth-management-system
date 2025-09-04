@@ -115,5 +115,5 @@ You can try the deployed project here:
 
 **Admin Test Account**
 
-- Email: `reza@mail.com`
-- Password: `reza123`
+- Email: `admin@mail.com`
+- Password: `admin123`
