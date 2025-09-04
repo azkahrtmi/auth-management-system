@@ -78,7 +78,7 @@ npm run dev
 ## 📡 API Endpoints
 | Method | Endpoint              | Description           |
 | ------ | --------------------- | --------------------- |
-| POST   | `/auth/register`      | Register new user     |
+| POST   | `/auth/signup`        | Register new user     |
 | POST   | `/auth/login`         | Login (user/admin)    |
 | GET    | `/admin/users`        | Admin: view all users |
 | POST   | `/admin/users`        | Admin: create user    |
@@ -86,3 +86,13 @@ npm run dev
 | PUT    | `/admin/users/{id}`   | Admin: edit user      |
 | DELETE | `/admin/users/{id}`   | Admin: delete user    |
 
+---
+## 🌐 Live Demo
+
+You can try the deployed project here:  
+👉 [Auth Management System](https://auth-management-system.vercel.app/admin)
+
+**Admin Test Account**
+
+- Email: `reza@mail.com`
+- Password: `reza123`
