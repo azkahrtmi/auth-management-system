@@ -30,8 +30,6 @@ function ContainerForm() {
       }
 
       // simpan token & role
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("role", data.user.role);
 
       toast.success("Login berhasil!");
 
