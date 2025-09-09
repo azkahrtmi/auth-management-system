@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 interface AuthRequest extends Request {
-  user?: any; // tambahin properti user setelah verifikasi JWT
+  user?: JwtPayload | string; // hasil decode JWT
 }
 
 export const verifyToken = (
@@ -10,8 +10,8 @@ export const verifyToken = (
   res: Response,
   next: NextFunction
 ) => {
-  const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1]; // format: Bearer <token>
+  // Ambil token dari cookie
+  const token = req.cookies?.token;
 
   if (!token) {
     return res.status(401).json({ message: "No token provided" });
@@ -28,11 +28,11 @@ export const verifyToken = (
 
 export const checkRole = (role: string) => {
   return (req: AuthRequest, res: Response, next: NextFunction) => {
-    if (!req.user) {
+    if (!req.user || typeof req.user === "string") {
       return res.status(401).json({ message: "Unauthorized" });
     }
 
-    if (req.user.role !== role) {
+    if ((req.user as JwtPayload).role !== role) {
       return res.status(403).json({ message: "Forbidden: Insufficient role" });
     }
 
